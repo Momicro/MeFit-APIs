@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-     // https://www.baeldung.com/spring-security-expressions
+    // https://www.baeldung.com/spring-security-expressions
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         boolean enableSecurity = true;
@@ -26,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             http.cors()
                     .and()
                     .authorizeRequests()
+                    .antMatchers("/api/v1/profiles/*/picture").permitAll()
                     /*
                     .antMatchers("/user/info", "user/info/principal").permitAll()
                     .antMatchers("/api/resources/user").hasRole("User")
-                    .antMatchers("/api/resources/admin").hasRole("Admin")
                     */
                     .anyRequest()
                     .authenticated()

@@ -44,6 +44,18 @@ class Goal {
             columnDefinition = "BOOLEAN")
     private boolean archived;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @JsonGetter("user")
+    public String userGetter() {
+        if (user != null)
+            return "/api/v1/users/" + user.getId();
+        else
+            return null;
+    }
+
     //related data
     //goal - programs - relation
     @OneToMany
@@ -69,7 +81,7 @@ class Goal {
     private Set<Workout> workouts = new HashSet<>();
 
     // restricts the output to a List of IDs of the workouts
-    @JsonGetter("userRights")
+    @JsonGetter("workouts")
     public List<String> workouts() {
         if(workouts != null) {
             return workouts.stream()

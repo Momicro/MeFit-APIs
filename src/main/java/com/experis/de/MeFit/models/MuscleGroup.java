@@ -48,6 +48,10 @@ public  @Getter
         return null;
     }
 
+    public long getId() {
+        return id;
+    }
+
     /*
     //restricts the output to the exercise ID
     @JsonGetter("exercise")

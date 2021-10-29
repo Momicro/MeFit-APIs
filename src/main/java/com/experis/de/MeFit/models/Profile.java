@@ -3,6 +3,7 @@ package com.experis.de.MeFit.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -25,14 +26,13 @@ public @Data class Profile {
     private Boolean contributorRequest;
 
     @Lob
+    // ImageType needed for saving "big" data stream
+    // see: https://stackoverflow.com/questions/3164072/large-objects-may-not-be-used-in-auto-commit-mode
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] picture;
 
     @OneToOne(mappedBy = "profile")
     private User user;
-
-    @OneToOne
-    @JoinColumn(name = "goal_id")
-    private Goal goal;
 
     @JsonGetter("user")
     public String userGetter() {

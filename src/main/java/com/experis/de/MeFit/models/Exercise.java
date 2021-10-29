@@ -77,4 +77,7 @@ public  @Getter
         }
     }
 
+    public long getId() {
+        return id;
+    }
 }
